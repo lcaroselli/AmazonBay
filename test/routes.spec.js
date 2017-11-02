@@ -63,4 +63,22 @@ describe('API', () => {
         });
     });
   });
+
+  describe('GET /api/v1/order_history', () => {
+    it('should retrieve order history', (done) => {
+      chai.request(server)
+        .get('/api/v1/order_history')
+        .end( (error, response) => {
+          response.should.have.status(200);
+          response.should.be.json;
+          response.body.length.should.equal(3);
+          response.body.forEach(order => {
+            order.should.have.property('id');
+            order.should.have.property('order_total');
+          });
+          done();
+        });
+    });
+  });
+
 });
