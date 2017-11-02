@@ -54,6 +54,17 @@ app.get('/api/v1/inventory/:id', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
+app.post('/api/v1/order_history', (request, response) => {
+  const order = request.body;
+
+  if (!order.order_total) {
+    return response.status(422).send({ error: 'Your order is missing a required property.' });
+  }
+
+  database('order_history').insert({ order_total: order.order_total }, '*')
+    .then(order => response.status(201).json(order))
+    .catch(error => response.status(500).json({ error }));
+});
 
 
 module.exports = app;
