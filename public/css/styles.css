@@ -64,6 +64,7 @@ main {
 }
 
 #price {
+  display: inline-block;
   font-size: 30px;
   color: #007EA7;
 }
