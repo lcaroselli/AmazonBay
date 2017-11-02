@@ -16,7 +16,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/amazonbay-test',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/amazonbaytest',
     migrations: {
       directory: './db/migrations',
     },
