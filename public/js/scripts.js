@@ -11,11 +11,12 @@ const showInventory = (inventory) => {
       $('#card-container').append(`
         <article class='card'>
           <h5>${key.item_title}</h5>
-          <h5>Description:</h5>
-          <p>${key.item_description}</p>
+          <span class='item-description'>
+            <p>${key.item_description}</p>
+          </span>
           <img src="${key.item_image}" alt="image item to purchase">
           <h5>Price:</h5>
-          <p>$${key.item_price}</p>
+          <p id='price'>$${key.item_price}</p>
           <button type="button" name="button">Add to Cart</button>
         </article>
         `)
