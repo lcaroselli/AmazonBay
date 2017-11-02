@@ -10,7 +10,7 @@ const showInventory = (inventory) => {
     return inventory.map(key => {
       $('#card-container').append(`
         <article class='card'>
-          <h5>${key.item_title}</h5>
+          <h5 id='new-item-title'>${key.item_title}</h5>
           <span class='item-description'>
             <p>${key.item_description}</p>
           </span>
@@ -40,12 +40,14 @@ const showOrders = () => {
   `)
 }
 
-const addToCart = () => {
-  //Add that item into the cart
+const addToCart = (e) => {
+  const targetItemName = $(e.target).closest('article').children('#new-item-title');
+  const targetItemPrice = $(e.target).closest('article').children('#price');
+
   $('#cart-container').append(`
     <article class='cart-item'>
-      <h5>ITEM</h5>
-      <p>PRICE</p>
+      <h5>${targetItemName[0].innerHTML}</h5>
+      <p>${targetItemPrice[0].innerHTML}</p>
     </article>
   `)
 }
