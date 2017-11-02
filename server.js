@@ -8,9 +8,7 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', process.env.PORT || 3000);
@@ -37,12 +35,25 @@ app.get('/api/v1/order_history', (request, response) => {
     .then(orders => {
       if (!orders.length) {
         return response.status(404).json({ error: 'Orders not found.' });
-      } else {
-        return orders;
-      }
+      } return orders;
     })
     .then(orders => response.status(200).json(orders))
     .catch(error => response.status(500).json({ error }));
 });
+
+app.get('/api/v1/inventory/:id', (request, response) => {
+  const { id } = request.params
+
+  database('inventory').where({ id }).select()
+    .then(item => {
+      if (!item.length) {
+        return response.status(404).json({ error: 'Item not found.' });
+      } return item;
+    })
+    .then(item => response.status(200).json(item))
+    .catch(error => response.status(500).json({ error }));
+});
+
+
 
 module.exports = app;
