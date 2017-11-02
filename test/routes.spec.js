@@ -48,7 +48,7 @@ describe('API', () => {
     it('should retrieve inventory', (done) => {
       chai.request(server)
         .get('/api/v1/inventory')
-        .end( (error, response) => {
+        .end((error, response) => {
           response.should.have.status(200);
           response.should.be.json;
           response.body.length.should.equal(10);
@@ -68,10 +68,10 @@ describe('API', () => {
     it('should retrieve order history', (done) => {
       chai.request(server)
         .get('/api/v1/order_history')
-        .end( (error, response) => {
+        .end((error, response) => {
           response.should.have.status(200);
           response.should.be.json;
-          response.body.length.should.equal(3);
+          response.body.length.should.equal(8);
           response.body.forEach(order => {
             order.should.have.property('id');
             order.should.have.property('order_total');
@@ -81,4 +81,31 @@ describe('API', () => {
     });
   });
 
+
+  describe('POST /api/v1/order_history', () => {
+    it('should POST a new order', (done) => {
+      chai.request(server)
+        .post('/api/v1/order_history')
+        .send({
+          order_total: 1.99
+        })
+        .end((error, response) => {
+          response.should.have.status(201);
+          response.should.be.json;
+          response.body.length.should.equal(1);
+          response.body[0].should.have.property('id');
+          response.body[0].should.have.property('order_total');
+
+          chai.request(server)
+            .get('/api/v1/order_history')
+            .end((error, response) => {
+              response.should.have.status(200);
+              response.should.be.json;
+              response.body.should.be.a('array');
+              response.body.length.should.equal(9);
+              done()
+            })
+        })
+    })
+  })
 });
