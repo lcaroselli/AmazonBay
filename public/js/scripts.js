@@ -17,11 +17,41 @@ const showInventory = (inventory) => {
           <img src="${key.item_image}" alt="image item to purchase">
           <h5>Price:</h5>
           <p id='price'>$${key.item_price}</p>
-          <button type="button" name="button">Add to Cart</button>
+          <button class="add-cart" type="button" name="button">Add to Cart</button>
         </article>
         `)
       })
   }
+}
+
+const showCart = () => {
+  //Unhide/Show the cart
+  console.log('Clicked Cart')
+}
+
+const showOrders = () => {
+  //Unhide/Show orders posted in DB
+  $('#order-container').append(`
+    <article class='cart-item'>
+      <h5>Order #...</h5>
+      <p>Order Date: ...</p>
+      <p>Total Price: ...</p>
+    </article>
+  `)
+}
+
+const addToCart = () => {
+  //Add that item into the cart
+  $('#cart-container').append(`
+    <article class='cart-item'>
+      <h5>ITEM</h5>
+      <p>PRICE</p>
+    </article>
+  `)
+}
+
+const postCart = () => {
+  console.log('Add Cart to order_history DB');
 }
 
 const loadPageInfo = () => {
@@ -29,3 +59,8 @@ const loadPageInfo = () => {
 }
 
 $(window).on('load', loadPageInfo);
+
+$('#show-cart').on('click', showCart);
+$('#show-orders').on('click', showOrders);
+$('#card-container').on('click', '.add-cart', addToCart);
+$('#purchase-cart').on('click', postCart);

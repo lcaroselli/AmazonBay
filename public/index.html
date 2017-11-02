@@ -12,16 +12,22 @@
 
     <main>
       <aside id='order-history'>
-        <button type="button" name="button">+</button>
+        <button class='side-pane' id='show-orders' type="button" name="button">+</button>
         <h3>Order History</h3>
+        <section id='order-container'>
+        </section>
       </aside>
 
       <section id='card-container'>
       </section>
 
       <aside id='cart'>
-        <button type="button" name="button">+</button>
+        <button class='side-pane' id='show-cart' type="button" name="button">+</button>
         <h3>Cart</h3>
+        <section id='cart-container'>
+          <p id='total-cart'>Total: $</p>
+          <button id='purchase-cart' type="button" name="button">Checkout and Purchase</button>
+        </section>
       </aside>
     </main>
 
