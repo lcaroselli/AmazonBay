@@ -28,5 +28,4 @@ const loadPageInfo = () => {
   fetchInventory();
 }
 
-
 $(window).on('load', loadPageInfo);

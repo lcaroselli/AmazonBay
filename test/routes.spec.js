@@ -103,9 +103,9 @@ describe('API', () => {
               response.should.be.json;
               response.body.should.be.a('array');
               response.body.length.should.equal(9);
-              done()
-            })
-        })
-    })
-  })
+              done();
+            });
+        });
+    });
+  });
 });
