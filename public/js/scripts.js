@@ -79,8 +79,9 @@ const showOrders = (order) => {
   order.forEach(item =>
     $('#order-container').append(`
       <article class='cart-item'>
-        <p data-date='${item.created_at}'>Order Date: ${item.created_at}</p>
-        <p data-price='${item.order_total}'>Total Price: ${item.order_total}</p>
+        <p data-date='${item.created_at}'>Order Date: ${item.created_at.slice(0, 10)}</p>
+        <p data-price='${item.order_total}'>Total Price: $${Math.round(item.order_total)}</p>
+        <hr />
       </article>
     `)
   )
@@ -117,7 +118,7 @@ const calculateTotal = (cartArray) => {
     total += item.price;
   });
 
-  $('#total-price-cart').text(`$${total}`);
+  $('#total-price-cart').text(`$${Math.round(total)}`);
 }
 
 const loadPageInfo = () => {
@@ -127,7 +128,6 @@ const loadPageInfo = () => {
 }
 
 $(window).on('load', loadPageInfo);
-// $('#show-cart').on('click', showCart);
 $('#show-orders').on('click', showOrders);
 $('#card-container').on('click', '.add-cart', addToCart);
 $('#cart').on('click', '#purchase-cart', addCart);
