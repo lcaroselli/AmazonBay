@@ -52,12 +52,6 @@ const showInventory = (inventory) => {
   }
 }
 
-const showCart = () => {
-  //Unhide cart
-  // console.log('Clicked Cart')
-}
-
-
 const addToCart = (e) => {
   const cartArray = JSON.parse(localStorage.getItem('cartArray')) || []
   const itemCard = $(e.target).closest('article')
@@ -76,6 +70,8 @@ const addToCart = (e) => {
   `)
 
   localStorage.setItem('cartArray', JSON.stringify(cartArray));
+
+  calculateTotal(cartArray)
 }
 
 
@@ -131,7 +127,7 @@ const loadPageInfo = () => {
 }
 
 $(window).on('load', loadPageInfo);
-$('#show-cart').on('click', showCart);
+// $('#show-cart').on('click', showCart);
 $('#show-orders').on('click', showOrders);
 $('#card-container').on('click', '.add-cart', addToCart);
 $('#cart').on('click', '#purchase-cart', addCart);
