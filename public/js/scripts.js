@@ -5,11 +5,32 @@ const fetchInventory = () => {
   .then(response => showInventory(response))
 }
 
+const fetchCartFromStorage = () => {
+  const storage = JSON.parse(localStorage.getItem('cartArray'));
+  if(!storage) {
+    $('#cart-container').append(
+      `<h5>There are no items in your cart.</h5>`
+    );
+  } else {
+    calculateTotal(storage);
+    storage.forEach(item => showSavedCart(item));
+  }
+}
+
+const showSavedCart = (item) => {
+  $('#cart-container').append(
+    `<article class='cart-item'>
+      <h5>${item.title}</h5>
+      <p>${item.price}</p>
+    </article>
+  `);
+}
+
 const showInventory = (inventory) => {
   if (inventory !== undefined) {
     return inventory.map(key => {
       $('#card-container').append(`
-        <article class='card'>
+        <article data-title='${key.item_title}' data-price='${key.item_price}' class='card'>
           <h5 id='new-item-title'>${key.item_title}</h5>
           <span class='item-description'>
             <p>${key.item_description}</p>
@@ -30,8 +51,27 @@ const showCart = () => {
 }
 
 
-const addToCart = () => {
-  console.log('Add Item')
+const addToCart = (e) => {
+  const cartArray = JSON.parse(localStorage.getItem('cartArray')) || []
+
+  const itemCard = $(e.target).closest('article')
+  const itemData = itemCard.data();
+
+  cartArray.push(itemData)
+
+  // console.log(cartArray)
+
+  const targetItemName = $(e.target).closest('article').children('#new-item-title');
+  const targetItemPrice = $(e.target).closest('article').children('#price');
+
+  $('#cart-container').append(`
+    <article class='cart-item'>
+      <h5>${targetItemName[0].innerHTML}</h5>
+      <p>${targetItemPrice[0].innerHTML}</p>
+    </article>
+  `)
+
+  localStorage.setItem('cartArray', JSON.stringify(cartArray));
 }
 
 
@@ -40,11 +80,12 @@ const showOrders = (order) => {
 
   $('#order-container').append(`
     <article class='cart-item'>
-    <p>Order Date: ${order.created_at}</p>
-    <p>Total Price: ${order.order_total}</p>
+    <p>Order Date: ${created_at}</p>
+    <p>Total Price: ${order_total}</p>
     </article>
     `)
   }
+
 
 const postCart = (order) => {
   const total = $('#total-price-cart').text()
@@ -60,12 +101,22 @@ const postCart = (order) => {
   .catch(error => console.log({ error }));
 }
 
+const calculateTotal = (cartArray) => {
+  let total = 0;
+
+  cartArray.forEach(item => {
+    total += item.price;
+  });
+
+  $('#total-price-cart').text(`$${total}`);
+}
+
 const loadPageInfo = () => {
   fetchInventory();
+  fetchCartFromStorage();
 }
 
 $(window).on('load', loadPageInfo);
-
 $('#show-cart').on('click', showCart);
 $('#show-orders').on('click', showOrders);
 $('#card-container').on('click', '.add-cart', addToCart);
