@@ -21,14 +21,14 @@ exports.seed = (knex, Promise) => {
           item_title: 'Fluffy Yellow Coat for your Dog',
           item_description: 'What a nice floof dat tungg tho extremely cuuuuuute shoob ur givin me a spook very hand that feed shibe shibe waggy wags.',
           item_image: 'https://images-na.ssl-images-amazon.com/images/I/61vWcDOGQSL._SL1198_.jpg',
-          item_price: 12.50
+          item_price: 12.59
         },
         {
           id: 4,
           item_title: 'Spicy Red Doggo Coat',
           item_description: 'Yapper heckin blep, such treat. Very hand that feed shibe you are doing me a frighten snoot borkdrive dat tungg tho.',
           item_image: 'https://images-na.ssl-images-amazon.com/images/I/61QAgL5-NtL._SL1028_.jpg',
-          item_price: 10.00
+          item_price: 10.99
         },
         {
           id: 5,
@@ -49,14 +49,14 @@ exports.seed = (knex, Promise) => {
           item_title: 'Green Doggo Vest',
           item_description: 'Mlem lotsa pats shooberino heckin good boys and girls super chub smol borking doggo with a long snoot.',
           item_image: 'https://images-na.ssl-images-amazon.com/images/I/410aTnyvGfL.jpg',
-          item_price: 18.00
+          item_price: 18.99
         },
         {
           id: 8,
           item_title: 'Black Dog Vest Coat Thing',
           item_description: 'You are doin me a concern noodle horse blop heckin angery woofer, fluffer.',
           item_image: 'https://images-na.ssl-images-amazon.com/images/I/61RjMFYPixL._SL1001_.jpg',
-          item_price: 25.00
+          item_price: 25.99
         },
         {
           id: 9,
@@ -70,7 +70,7 @@ exports.seed = (knex, Promise) => {
           item_title: 'Yellow Coat for Dogge',
           item_description: 'shoob you are doin me a concern. Shooberino what a nice floof ruff long water shoob super chub.',
           item_image: 'https://images-na.ssl-images-amazon.com/images/I/71Plzqv0W6L._SL1000_.jpg',
-          item_price: 12.02
+          item_price: 12.99
         }
       ]);
     });

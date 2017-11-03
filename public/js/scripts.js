@@ -44,7 +44,7 @@ const showInventory = (inventory) => {
           </span>
           <img src="${key.item_image}" alt="image item to purchase">
           <h5>Price:</h5>
-          <p id='price'>${key.item_price}</p>
+          <p id='price'>$${key.item_price}</p>
           <button class="add-cart" type="button" name="button">Add to Cart</button>
         </article>
         `)
@@ -89,6 +89,7 @@ const showOrders = (order) => {
 
 const addCart = () => {
   let total = 0;
+
   const cartArray = JSON.parse(localStorage.getItem('cartArray'));
 
   cartArray.forEach(item => {
@@ -96,6 +97,8 @@ const addCart = () => {
   });
 
   postCart(total);
+
+  $('#cart-container').children().remove();
 }
 
 const postCart = (total) => {
@@ -127,7 +130,30 @@ const loadPageInfo = () => {
   fetchCartFromStorage();
 }
 
+const showAllOrders = () => {
+  $('#order-container').removeClass('hide')
+  $('#order-container').addClass('show')
+}
+
+const showAllCart = () => {
+  $('#cart-container').removeClass('hide')
+  $('#cart-container').addClass('show')
+}
+
+const hideAllOrders = () => {
+  $('#order-container').removeClass('show')
+  $('#order-container').addClass('hide')
+}
+
+const hideAllCart = () => {
+  $('#cart-container').removeClass('show')
+  $('#cart-container').addClass('hide')
+}
+
 $(window).on('load', loadPageInfo);
-$('#show-orders').on('click', showOrders);
+$('#show-orders').on('click', showAllOrders);
+$('#show-cart').on('click', showAllCart);
+$('#hide-orders').on('click', hideAllOrders);
+$('#hide-cart').on('click', hideAllCart);
 $('#card-container').on('click', '.add-cart', addToCart);
 $('#cart').on('click', '#purchase-cart', addCart);

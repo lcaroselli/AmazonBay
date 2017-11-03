@@ -68,3 +68,12 @@ main {
   font-size: 30px;
   color: #007EA7;
 }
+
+.hide {
+  visibility: hidden;
+  display: none;
+}
+
+.show {
+  visibility: visible;
+}

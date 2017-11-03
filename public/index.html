@@ -12,10 +12,11 @@
 
     <main>
       <aside id='order-history'>
-        <button class='side-pane' id='show-orders' type="button" name="button">+</button>
+        <button class='side-pane' class='show' id='show-orders' type="button" name="button">+</button>
+        <button class='side-pane' class='hide' id='hide-orders' type="button" name="button">-</button>
         <h3>Order History</h3>
         <hr />
-        <section id='order-container'>
+        <section id='order-container' class='hide'>
         </section>
       </aside>
 
@@ -24,9 +25,10 @@
 
       <aside id='cart'>
         <button class='side-pane' id='show-cart' type="button" name="button">+</button>
+        <button class='side-pane' class='hide' id='hide-cart' type="button" name="button">-</button>
         <h3>Cart</h3>
         <hr />
-        <section id='cart-container'>
+        <section id='cart-container' class='hide'>
         </section>
         <button id='purchase-cart' type="button" name="button">Checkout and Purchase</button>
         <p id='total-cart'>Total: <span id='total-price-cart'></span> </p>
