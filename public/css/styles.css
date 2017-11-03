@@ -55,7 +55,8 @@ main {
   color: white;
   border: 3px solid white;
   text-align: center;
-  width: 10%;
+  overflow-y: scroll;
+  width: 20%;
 }
 
 .item-description p {
@@ -76,4 +77,12 @@ main {
 
 .show {
   visibility: visible;
+}
+
+button#show-orders, button#show-cart, button#hide-orders, button#hide-cart {
+    height: 40%;
+    border: none;
+    font-size: 40px;
+    background: red;
+    width: 30px;
 }
