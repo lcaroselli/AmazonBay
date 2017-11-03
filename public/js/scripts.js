@@ -5,6 +5,13 @@ const fetchInventory = () => {
   .then(response => showInventory(response))
 }
 
+const fetchOrders = () => {
+  fetch('/api/v1/order_history')
+  .then(response => response.json())
+  .then(response => { return response })
+  .then(response => showOrders(response))
+}
+
 const fetchCartFromStorage = () => {
   const storage = JSON.parse(localStorage.getItem('cartArray'));
   if(!storage) {
@@ -53,7 +60,6 @@ const showCart = () => {
 
 const addToCart = (e) => {
   const cartArray = JSON.parse(localStorage.getItem('cartArray')) || []
-
   const itemCard = $(e.target).closest('article')
   const itemData = itemCard.data();
 
@@ -77,8 +83,8 @@ const showOrders = (order) => {
   order.forEach(item =>
     $('#order-container').append(`
       <article class='cart-item'>
-      <p>Order Date: ${item.created_at}</p>
-      <p>Total Price: ${item.order_total}</p>
+        <p data-date='${item.created_at}'>Order Date: ${item.created_at}</p>
+        <p data-price='${item.order_total}'>Total Price: ${item.order_total}</p>
       </article>
     `)
   )
@@ -120,6 +126,7 @@ const calculateTotal = (cartArray) => {
 
 const loadPageInfo = () => {
   fetchInventory();
+  fetchOrders();
   fetchCartFromStorage();
 }
 
