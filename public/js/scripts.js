@@ -47,7 +47,7 @@ const showInventory = (inventory) => {
 
 const showCart = () => {
   //Unhide cart
-  console.log('Clicked Cart')
+  // console.log('Clicked Cart')
 }
 
 
@@ -58,8 +58,6 @@ const addToCart = (e) => {
   const itemData = itemCard.data();
 
   cartArray.push(itemData)
-
-  // console.log(cartArray)
 
   const targetItemName = $(e.target).closest('article').children('#new-item-title');
   const targetItemPrice = $(e.target).closest('article').children('#price');
@@ -76,20 +74,28 @@ const addToCart = (e) => {
 
 
 const showOrders = (order) => {
-  const { order_total, created_at } = order;
-
-  $('#order-container').append(`
-    <article class='cart-item'>
-    <p>Order Date: ${created_at}</p>
-    <p>Total Price: ${order_total}</p>
-    </article>
+  order.forEach(item =>
+    $('#order-container').append(`
+      <article class='cart-item'>
+      <p>Order Date: ${item.created_at}</p>
+      <p>Total Price: ${item.order_total}</p>
+      </article>
     `)
-  }
+  )
+}
 
+const addCart = () => {
+  let total = 0;
+  const cartArray = JSON.parse(localStorage.getItem('cartArray'));
 
-const postCart = (order) => {
-  const total = $('#total-price-cart').text()
+  cartArray.forEach(item => {
+    total += item.price;
+  });
 
+  postCart(total);
+}
+
+const postCart = (total) => {
   fetch('/api/v1/order_history', {
     method: 'POST',
     body: JSON.stringify({ order_total: total }),
@@ -100,6 +106,7 @@ const postCart = (order) => {
   .then(response => showOrders(response))
   .catch(error => console.log({ error }));
 }
+
 
 const calculateTotal = (cartArray) => {
   let total = 0;
@@ -120,4 +127,4 @@ $(window).on('load', loadPageInfo);
 $('#show-cart').on('click', showCart);
 $('#show-orders').on('click', showOrders);
 $('#card-container').on('click', '.add-cart', addToCart);
-$('#cart').on('click', '#purchase-cart', postCart);
+$('#cart').on('click', '#purchase-cart', addCart);
